@@ -14,7 +14,7 @@ describe(@"nil", ^{
   
   it(@"evaluates to false in conditionals", ^{
     [[NSObject shouldNot] receive:@selector(description)];    
-    id panda = [NSObject new];
+    id panda = nil;
     if(panda){
       [NSObject description];
     }
@@ -24,7 +24,7 @@ describe(@"nil", ^{
     [[theBlock(^{
       id panda = nil;
       [panda description];
-    }) should] raise];
+    }) shouldNot] raise];
   });
   
 });

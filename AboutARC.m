@@ -23,12 +23,34 @@
 // More on ARC from the compiler team : http://clang.llvm.org/docs/AutomaticReferenceCounting.html
 //
 //  @property (nonatomic,strong) NSString *thingy;
+@property (nonatomic, weak) PhoneNumber *phoneNumber;
 @end
 
 @interface PhoneNumber : NSObject
-  // We would explicitly tell the ARC system that we want a weak reference to Person
-  // ie: don't keep the Person around if it's only retained reference is weak
-  @property (nonatomic, weak) Person *owner;
+// We would explicitly tell the ARC system that we want a weak reference to Person
+// ie: don't keep the Person around if it's only retained reference is weak
+@property (nonatomic, weak) Person *owner;
+@property (nonatomic, strong) NSString *countryCode;
+@property (nonatomic, strong) NSString *areaCode;
+@property (nonatomic, strong) NSString *digits;
+@end
+
+@implementation Person
+- (void) setPhoneNumber:(PhoneNumber *)input {
+    _phoneNumber = input;
+    _phoneNumber.owner = self;
+}
+@end
+
+@implementation PhoneNumber
+- (id) initWithCountryCode: (NSString*)countryCode areaCode:(NSString*)areaCode digits:(NSString*)digits {
+    if ( self = [super init] ) {
+        self.countryCode = countryCode;
+        self.areaCode = areaCode;
+        self.digits = digits;
+    }
+    return self;
+}
 @end
 
 #import "Kiwi.h"

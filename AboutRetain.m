@@ -21,29 +21,29 @@ describe(@"Retain Assertions", ^{
         
         it(@"starts with a retainCount value", ^{
             int actual_count = [aString retainCount];
-            int expected_count = -1; // change this to the correct value
+            int expected_count = 1; // change this to the correct value
             [[theValue(actual_count) should] equal:theValue(expected_count)]; 
         });
         
         it(@"increments retainCount value according to the selector retain", ^{
             [aString retain];
             int actual_count = [aString retainCount];
-            int expected_count = -2; // change this to the correct value
+            int expected_count = 2; // change this to the correct value
             [[theValue(actual_count) should] equal:theValue(expected_count)]; 
         });
         
-        it(@"decriments retainCount on selector release", ^{ 
+        it(@"decrements retainCount on selector release", ^{
             
             [aString retain];
             [aString release];
             int actual_count = [aString retainCount];
-            int expected_count = -1; // change this to the correct value
+            int expected_count = 1; // change this to the correct value
             [[theValue(actual_count) should] equal:theValue(expected_count)]; 
             
             
             [aString release];
             actual_count = [aString retainCount];
-            expected_count = -1; // change this to the correct value
+            expected_count = 1; // change this to the correct value
             [[theValue(actual_count) should] equal:theValue(expected_count)]; 
             
             //
